@@ -1,21 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Admin Panel</title>
+    <meta charset="UTF-8">
+    <title>Admin - View Registrations</title>
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-    <h2>Registered Participants</h2>
-    <table border="1">
-        <tr><th>ID</th><th>Name</th><th>Email</th><th>Phone</th><th>Event</th></tr>
-        {% for r in registrations %}
-        <tr>
-            <td>{{ r[0] }}</td>
-            <td>{{ r[1] }}</td>
-            <td>{{ r[2] }}</td>
-            <td>{{ r[3] }}</td>
-            <td>{{ r[4] }}</td>
-        </tr>
-        {% endfor %}
+
+<div class="container">
+    <h1>Registered Participants</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Event</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for r in registrations %}
+            <tr>
+                <td>{{ r[0] }}</td>
+                <td>{{ r[1] }}</td>
+                <td>{{ r[2] }}</td>
+                <td>{{ r[3] }}</td>
+                <td>{{ r[4] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
     </table>
+</div>
+
 </body>
 </html>
