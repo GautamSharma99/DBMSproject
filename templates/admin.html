@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Panel</title>
+</head>
+<body>
+    <h2>Registered Participants</h2>
+    <table border="1">
+        <tr><th>ID</th><th>Name</th><th>Email</th><th>Phone</th><th>Event</th></tr>
+        {% for r in registrations %}
+        <tr>
+            <td>{{ r[0] }}</td>
+            <td>{{ r[1] }}</td>
+            <td>{{ r[2] }}</td>
+            <td>{{ r[3] }}</td>
+            <td>{{ r[4] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
