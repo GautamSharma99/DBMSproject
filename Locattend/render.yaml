@@ -1,8 +1,0 @@
-services:
-  - type: web
-    name: locattendance
-    env: python
-    buildCommand: ""
-    startCommand: gunicorn app:app
-    region: oregon
-    plan: free
