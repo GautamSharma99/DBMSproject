@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View Attendance - Locattend</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div class="container">
+        <h1>Attendance Records</h1>
+        
+        <div class="nav-links">
+            <a href="/" class="btn btn-secondary">Back to Events</a>
+        </div>
+        
+        {% if attendance_records %}
+        <table class="attendance-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Location (Lat, Long)</th>
+                    <th>Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for record in attendance_records %}
+                <tr>
+                    <td>{{ record[0] }}</td>
+                    <td>{{ record[1] }}</td>
+                    <td><a href="https://www.google.com/maps?q={{ record[2] }},{{ record[3] }}" target="_blank">{{ record[2] }}, {{ record[3] }}</a></td>
+                    <td>{{ record[4] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <div class="message">
+            <p>No attendance records found for this event.</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>

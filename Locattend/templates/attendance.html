@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Attendance - Locattend</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div class="container">
+        <h1>Mark Attendance</h1>
+        
+        <div class="form-card">
+            <form method="post" id="attendance-form">
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input id="name" name="name" placeholder="Enter your full name" required>
+                </div>
+                
+                <input type="hidden" name="latitude" id="latitude">
+                <input type="hidden" name="longitude" id="longitude">
+                
+                <div id="location-status" class="mb-2">
+                    <p>Getting your location...</p>
+                </div>
+                
+                <div class="mt-3">
+                    <button type="submit" class="btn btn-primary" id="submit-btn" disabled>Submit Attendance</button>
+                    <a href="/" class="btn btn-secondary">Back to Events</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const locationStatus = document.getElementById('location-status');
+        const submitBtn = document.getElementById('submit-btn');
+        
+        submitBtn.disabled = true;
+        
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                function(position) {
+                    document.getElementById('latitude').value = position.coords.latitude;
+                    document.getElementById('longitude').value = position.coords.longitude;
+                    locationStatus.innerHTML = '<p class="text-success">✓ Location acquired successfully</p>';
+                    submitBtn.disabled = false;
+                },
+                function(error) {
+                    let errorMessage = 'Error getting location: ';
+                    switch(error.code) {
+                        case error.PERMISSION_DENIED:
+                            errorMessage += 'Location permission denied';
+                            break;
+                        case error.POSITION_UNAVAILABLE:
+                            errorMessage += 'Location unavailable';
+                            break;
+                        case error.TIMEOUT:
+                            errorMessage += 'Request timed out';
+                            break;
+                        default:
+                            errorMessage += 'Unknown error';
+                            break;
+                    }
+                    locationStatus.innerHTML = '<p class="text-danger">' + errorMessage + '</p>';
+                }
+            );
+        } else {
+            locationStatus.innerHTML = '<p class="text-danger">Geolocation is not supported by this browser</p>';
+        }
+    </script>
+</body>
+</html>
